@@ -43,6 +43,7 @@ public class MinStack<T extends Comparable<T>>
 
     public static void main(String args[]) {
         MinStack<Integer> integerStack = new MinStack<>();
+        int value;
 
         System.out.println("Pushing 5");
         integerStack.push(5);
@@ -50,6 +51,28 @@ public class MinStack<T extends Comparable<T>>
         integerStack.push(4);
         System.out.println("Pushing 8");
         integerStack.push(8);
+        System.out.println("Pushing 3");
+        integerStack.push(3);
+        System.out.println("Pushing 5");
+        integerStack.push(5);
 
+        System.out.println("Expecting min of 3");
+        value = integerStack.pop();
+        if (value != 3)
+            System.out.println("Fail - " + value);
+        else
+            System.out.println("Pass");
+
+        System.out.println("Pop");
+        integerStack.pop();
+        System.out.println("Pop");
+        integerStack.pop();
+
+        System.out.println("Expecting min of 4");
+        value = integerStack.pop();
+        if (value != 4)
+            System.out.println("Fail - " + value);
+        else
+            System.out.println("Pass");
     }
 }

@@ -59,4 +59,21 @@ public class SimpleLinkedStack<T> implements Stack<T>
     {
         return size;
     }
+
+    public static void main(String args[])
+    {
+        // Simple test case of the stack.
+        Stack<String> stack = new SimpleLinkedStack<String>();
+
+        stack.push("A");
+        stack.push("B");
+        stack.push("C");
+        stack.pop();
+        stack.push("D");
+        stack.push("E");
+        stack.push("F");
+        stack.pop();
+        while (!stack.isEmpty())
+            System.out.println(stack.pop());
+    }
 }

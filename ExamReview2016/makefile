@@ -1,7 +1,10 @@
 
 
-all:
-	@echo "Not implemented"; exit 1
+all: build-polygon build-integertree build-minstack
+
+clean:
+	@echo "Deleting all .class files"
+	@rm -vf cls/*.class src/*.class
 
 build-polygon:
 	javac -d cls src/PolygonExample.java
@@ -22,3 +25,12 @@ build-minstack:
 
 run-minstack:
 	java -cp cls MinStack
+
+test-stack:
+	java -cp cls SimpleLinkedStack
+
+build-bst:
+	javac -d cls src/LinkedBST.java
+
+run-bst:
+	java -cp cls LinkedBST
