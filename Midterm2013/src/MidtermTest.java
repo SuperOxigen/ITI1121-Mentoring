@@ -1,4 +1,4 @@
-public class Test {
+public class MidtermTest {
     public static void main (String[] args) {
         NewsFeed messages;
         Post msg1, msg2;
@@ -8,7 +8,7 @@ public class Test {
         msg1 = new PhotoPost("David", "funny.png", "Birthday party");
         msg1.like();
         messages.add(msg1);
-        
+
         msg2 = new TextPost("David", "Dinner at your place with Alexe");
         msg2.like();
         msg2.like();
