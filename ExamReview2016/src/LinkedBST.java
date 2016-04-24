@@ -108,8 +108,53 @@ public class LinkedBST<T extends Comparable<T>> {
         }
 
         private void removeNode() {
-            // TODO - complete me
-            // Hint - you have access to the parent, left node, right node, and the BST root.
+            if (this == root && left == null && right == null) {
+                // Case 1 - is root, and no children
+                root = null;
+            } else if (right == null && left == null) {
+                // Case 2 - not root, and no children
+                if (parent.left == this)
+                    parent.left = null;
+                else
+                    parent.right = null;
+            } else if (right == null && left != null) {
+                // Case 3 - Has children on left, and not right
+                BSTNode<NT> node = left.greatestDescendant();
+                this.value = node.value;
+                node.removeNode();
+            } else if (left == null && right != null) {
+                // Case 3 - Has children on right, and not left
+                BSTNode<NT> node = right.lowestDescendant();
+                this.value = node.value;
+                node.removeNode();
+            } else {
+                // Case 4 - Has children on right and left
+                if (left.longestPathLength() > right.longestPathLength()) {
+                    // Left is longer
+                    BSTNode<NT> node = left.greatestDescendant();
+                    this.value = node.value;
+                    node.removeNode();
+                } else {
+                    // Right is longer
+                    BSTNode<NT> node = right.lowestDescendant();
+                    this.value = node.value;
+                    node.removeNode();
+                }
+            }
+        }
+
+        private BSTNode<NT> greatestDescendant() {
+            if (right != null)
+                return right.greatestDescendant();
+            else
+                return this;
+        }
+
+        private BSTNode<NT> lowestDescendant() {
+            if (left != null)
+                return left.lowestDescendant();
+            else
+                return this;
         }
     }
 
@@ -161,6 +206,14 @@ public class LinkedBST<T extends Comparable<T>> {
         }
         if (!tree.contains(7)) {
             System.out.println("7 is missing!");
+        }
+
+        for (int i = 1; i <= 8; i++) {
+            System.out.print("Checking for " + i + " in tree - ");
+            if (!tree.contains(i))
+                System.out.println("NO");
+            else
+                System.out.println("YES");
         }
     }
 }

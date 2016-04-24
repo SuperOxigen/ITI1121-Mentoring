@@ -4,41 +4,47 @@ public class MinStack<T extends Comparable<T>>
 {
     // Instance Variables
 
-
+    private Stack<T> minimumStack;
+    private Stack<T> stack;
 
     // Instance Methods
 
     public MinStack() {
-        // TODO
+        minimumStack = new SimpleLinkedStack<T>();
+        stack = new SimpleLinkedStack<T>();
     }
 
     public T pop() {
-        // TODO
-        return null;
+        if (isEmpty())
+            return null;
+
+        T value = stack.pop();
+        if (value.equals(minimumStack.peak()))
+            minimumStack.pop();
+
+        return value;
     }
 
     public T peak() {
-        // TODO
-        return null;
+        return stack.peak();
     }
 
     public T min() {
-        // TODO
-        return null;
+        return minimumStack.peak();
     }
 
     public void push(T elem) {
-        // TODO
+        if (isEmpty() || elem.compareTo(min()) <= 0)
+            minimumStack.push(elem);
+        stack.push(elem);
     }
 
     public boolean isEmpty() {
-        // TODO
-        return false;
+        return stack.isEmpty();
     }
 
     public int size() {
-        // TODO
-        return 0;
+        return stack.size();
     }
 
     public static void main(String args[]) {
@@ -57,7 +63,7 @@ public class MinStack<T extends Comparable<T>>
         integerStack.push(5);
 
         System.out.println("Expecting min of 3");
-        value = integerStack.pop();
+        value = integerStack.min();
         if (value != 3)
             System.out.println("Fail - " + value);
         else
@@ -69,7 +75,7 @@ public class MinStack<T extends Comparable<T>>
         integerStack.pop();
 
         System.out.println("Expecting min of 4");
-        value = integerStack.pop();
+        value = integerStack.min();
         if (value != 4)
             System.out.println("Fail - " + value);
         else
